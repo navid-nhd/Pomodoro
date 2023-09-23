@@ -3,8 +3,6 @@
         <label v-if="label" :for="id">{{ label }}</label>
         <input v-model="localModelValue" :name="name" :id="id" :type="type" class="border border-2 px-4 mx-5 my-3" />
         <br />
-        {{ modelValue }}
-        {{ localModelValue }}
     </div>
 </template>
 <script setup>
