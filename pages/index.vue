@@ -15,11 +15,26 @@
           class="bg-slate-300 px-3 py-1 rounded-md hover:bg-slate-400 transition-all">reset</button>
       </div>
     </div>
-    <div class="w-2/3 basis-2/3 h-full bg-slate-300">
+    <div class="w-2/3 basis-2/3 h-full bg-slate-300 flex items-center justify-center">
+      <div class="bg-gray">
+        <jput v-model="countryName" name="first_name" id="fname" label="Name" />
+        <jput v-model="countryName" name="last_name" id="lname" label="Email" />
+        <JButton type="primary" @click="timerStart()">Start</JButton>
+        <JButton type="secondry" @click="timerStop()">Cancel</JButton>
+      </div>
     </div>
   </div>
 </template>
 <script setup>
+
+const isRequired = (value) => {
+  console.log(value)
+  if (value && value.trim()) {
+    return true
+  }
+  return 'This is Required'
+
+}
 const duration = ref(2 * 60)// Timer in minutes
 const timer = ref(duration.value)
 const pomodoroIsPlayed = ref(false)
@@ -50,4 +65,6 @@ const minutes = computed(() => {
 const seconds = computed(() => {
   return (timer.value % 60 > 9) ? timer.value % 60 : `0${timer.value % 60}`
 })
+
+
 </script>

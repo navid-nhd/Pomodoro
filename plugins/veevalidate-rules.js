@@ -1,6 +1,15 @@
-import {Form, Field, ErrorMessage} from 'vee-validate'
+
+import { defineRule } from "vee-validate";
+import * as rules from "@vee-validate/rules";
+
 export default defineNuxtPlugin((nuxtApp) => {
-    nuxtApp.vueApp.component("VForm",Form);
-    nuxtApp.vueApp.component("VField",Field);
-    nuxtApp.vueApp.component("VErrorMessage",ErrorMessage)
+    //defineRules('required',required);
+    //defineRules('email',email);
+    //defineRules('min',min);
+    Object.keys(rules)
+    .filter((k) => k !== "default")
+    .forEach((rule) =>{
+        defineRule(rule,rules[rule]);
+        console.log(rule);
+    })
 })
