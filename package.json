@@ -13,5 +13,10 @@
     "@nuxt/devtools": "latest",
     "@nuxtjs/tailwindcss": "^6.8.0",
     "nuxt": "^3.7.3"
+  },
+  "dependencies": {
+    "@vee-validate/rules": "^4.11.6",
+    "vee-validate": "^4.11.6",
+    "yup": "^1.3.0"
   }
 }
