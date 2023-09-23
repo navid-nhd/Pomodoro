@@ -7,9 +7,9 @@
         </div>
       </div>
       <div class="flex gap-4 my-3">
-        <button @click="start()"
+        <button @click="start()" v-show="!pomodoroIsPlayed"
           class="bg-slate-300 px-3 py my-3-1 rounded-md hover:bg-slate-400 transition-all">play</button>
-        <button @click="pause()"
+        <button @click="pause()" v-show="pomodoroIsPlayed"
           class="bg-slate-300 px-3 py-1 rounded-md hover:bg-slate-400 transition-all">pause</button>
         <button @click="reset()"
           class="bg-slate-300 px-3 py-1 rounded-md hover:bg-slate-400 transition-all">reset</button>
@@ -20,14 +20,17 @@
   </div>
 </template>
 <script setup>
-const duration = ref(2 * 60)
-const timer = ref(duration.value) // Timer in minutes
+const duration = ref(2 * 60)// Timer in minutes
+const timer = ref(duration.value)
+const pomodoroIsPlayed = ref(false)
 const interval = ref(null)
 const start = () => {
+  pomodoroIsPlayed.value = true
   interval.value = setInterval(() => {
     if (timer.value > 0) {
       timer.value--
     } else {
+      pomodoroIsPlayed.value = false
       pause()
     }
     console.log(timer.value)
@@ -39,6 +42,7 @@ const pause = () => {
 const reset = () => {
   pause()
   timer.value = duration.value
+  pomodoroIsPlayed.value = false
 }
 const minutes = computed(() => {
   return Math.floor(timer.value / 60) > 9 ? Math.floor(timer.value / 60) : `0${Math.floor(timer.value / 60)}`
