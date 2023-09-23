@@ -11,6 +11,8 @@
           class="bg-slate-300 px-3 py my-3-1 rounded-md hover:bg-slate-400 transition-all">play</button>
         <button @click="pause()"
           class="bg-slate-300 px-3 py-1 rounded-md hover:bg-slate-400 transition-all">pause</button>
+        <button @click="reset()"
+          class="bg-slate-300 px-3 py-1 rounded-md hover:bg-slate-400 transition-all">reset</button>
       </div>
     </div>
     <div class="w-2/3 basis-2/3 h-full bg-slate-300">
@@ -18,12 +20,14 @@
   </div>
 </template>
 <script setup>
-const timer = ref(70)
+const duration = ref(2 * 60)
+const timer = ref(duration.value) // Timer in minutes
 const interval = ref(null)
 const start = () => {
   interval.value = setInterval(() => {
-    timer.value--
-    if (timer.value === 0) {
+    if (timer.value > 0) {
+      timer.value--
+    } else {
       pause()
     }
     console.log(timer.value)
@@ -31,6 +35,10 @@ const start = () => {
 }
 const pause = () => {
   clearInterval(interval.value)
+}
+const reset = () => {
+  pause()
+  timer.value = duration.value
 }
 const minutes = computed(() => {
   return Math.floor(timer.value / 60) > 9 ? Math.floor(timer.value / 60) : `0${Math.floor(timer.value / 60)}`
