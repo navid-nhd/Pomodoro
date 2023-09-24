@@ -24,6 +24,7 @@
             <li class="list-disc !ml-4">{{ error }}</li>
           </ul>
         </div>
+        {{ contactInfo.email.indexOf('.') }}{{ contactInfo.email.length - 1 }}
         <JButton type="primary" @click="startTimer()">Start</JButton>
         <JButton type="secondry" @click="reset()">Reset</JButton>
       </div>
@@ -51,7 +52,12 @@ const startTimer = () => {
   }
 }
 const emailValidation = computed(() => {
-  if (contactInfo.value.email.includes('@') && contactInfo.value.email.includes('.') && (contactInfo.value.email.indexOf('@') < contactInfo.value.email.indexOf('.'))) {
+  if (contactInfo.value.email.includes('@') &&
+    contactInfo.value.email.includes('.') &&
+    (contactInfo.value.email.indexOf('@') < contactInfo.value.email.indexOf('.')) &&
+    contactInfo.value.email.indexOf('@') !== 0 &&
+    contactInfo.value.email.indexOf('.') !== (contactInfo.value.email.length - 1)
+  ) {
     return true
   } else {
     return false
