@@ -35,12 +35,24 @@ const { values, errors, defineInputBinds } = useForm({
             // }
             // return true
             // const regex = new RegExp('')
-            return value.test(/^((+98|0)?9\d{9})$/) || context.createError({ message: 'عدد باید با ۰۹ شروع شود' })
+            return /^(\+98|0)?9\d{9}$/.test(value) || context.createError({ message: 'ERROR' })
+            //    /^((+98|0)?9\d{9})$/
+            //    /^((09)\d{9})$/
+            //     /^\d{3}-\d{3}-\d{4}$/
         })
+
     }),
 });
 
 const email = defineInputBinds('email')
 const userName = defineInputBinds('userName')
 const phone = defineInputBinds('phone')
+
+
+
+//             / content /
+//             / content /gi ==> global - case-insensetive
+//             / content /gi
+//              /^(\+98|0)?9\d{9}$/
+//              /^[https?]+:\/\/((w{3}\.)?[\w+]+)\.[\w+]+$/i
 </script>
